@@ -1,0 +1,19 @@
+# DockerFile for Hello world java
+# MIT license
+
+# our base image is the centos one
+FROM openjdk:alpine
+
+LABEL Custom image for alpine/openjdk/hello-world
+
+# we copy the source code
+COPY src /usr/src
+
+# we go in the directrory containing the HelloWorldRunner.java file
+WORKDIR /usr/src/main/java
+
+# we compile the program
+RUN javac HelloWorldRunner.java
+
+# we run the program
+CMD ["java", "HelloWorldRunner"]
