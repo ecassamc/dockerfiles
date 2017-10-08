@@ -63,8 +63,9 @@ USER jboss
 # Expose the ports we're interested in
 EXPOSE 8080 9990
 
-RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
+# Creates an administrative user for wildfly, which enables to log-in within the console
+RUN /opt/jboss/wildfly/bin/add-user.sh -u admin -p admin --silent
 
-# Set the default command to run on boot
-# This will boot WildFly in the standalone mode and bind to all interface
+# Set the default command to run when the conatiner is bootstrapped
+# Tt starts WildFly in standalone mode and binds to all the network interfaces.
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
